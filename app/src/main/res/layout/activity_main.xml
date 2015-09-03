@@ -16,7 +16,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Hello Mary!" />
+        tools:text="Hello Mary!" />
 
     <Button
         android:id="@+id/newButton"
@@ -24,7 +24,7 @@
         android:layout_above="@+id/pastButton"
         android:layout_centerHorizontal="true"
         android:onClick="startExperiment"
-        android:text="New Experiments" />
+        android:text="New Experiment" />
 
     <Button
         android:id="@+id/pastButton"

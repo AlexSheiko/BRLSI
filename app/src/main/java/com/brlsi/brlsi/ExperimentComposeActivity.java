@@ -14,7 +14,7 @@ import com.parse.ParseUser;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ExperimentActivity extends AppCompatActivity {
+public class ExperimentComposeActivity extends AppCompatActivity {
 
     @Bind(R.id.name)
     EditText nameField;
@@ -32,7 +32,7 @@ public class ExperimentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_experiment);
+        setContentView(R.layout.activity_compose_experiment);
         ButterKnife.bind(this);
 
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -94,13 +94,13 @@ public class ExperimentActivity extends AppCompatActivity {
     }
 
     private void restoreFieldValues() {
-        String name = mPrefs.getString("name", "");
+//        String name = mPrefs.getString("name", ParseUser.getCurrentUser().getUsername());
         String title = mPrefs.getString("title", "");
         String date = mPrefs.getString("date", "");
         String time = mPrefs.getString("time", "");
         String location = mPrefs.getString("location", "");
 
-        nameField.setText(name);
+//        nameField.setText(name);
         titleField.setText(title);
         dateField.setText(date);
         timeField.setText(time);
@@ -108,6 +108,11 @@ public class ExperimentActivity extends AppCompatActivity {
     }
 
     private void clearFieldValues() {
+        nameField.setText("");
+        titleField.setText("");
+        dateField.setText("");
+        timeField.setText("");
+        locationField.setText("");
         mPrefs.edit().clear().apply();
     }
 }

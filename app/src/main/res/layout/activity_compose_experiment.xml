@@ -183,10 +183,10 @@
 
         <Button
             android:id="@+id/finishButton"
-            style="@style/ButtonLarge"
-            android:layout_gravity="center_horizontal"
             android:onClick="finishExperiment"
-            android:text="Finished" />
+            android:text="Finished"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

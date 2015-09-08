@@ -22,6 +22,7 @@
         </activity>
         <activity
             android:name=".LogInActivity"
+            android:noHistory="true"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity

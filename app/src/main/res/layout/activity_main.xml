@@ -51,7 +51,7 @@
         style="@style/ButtonLarge"
         android:background="?selectableItemBackground"
         android:layout_alignParentBottom="true"
-        android:onClick="reviewExperiments"
+        android:onClick="logOut"
         android:textColor="#545454"
         android:text="Log out"
         android:layout_width="match_parent"

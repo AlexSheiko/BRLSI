@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.ParseUser;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -30,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-//        nameField.setText(String.format("Hello %s!",
-//                ParseUser.getCurrentUser().getUsername()));
-        Typeface droidSans = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
+        nameView.setText(String.format("Hello, %s!",
+                ParseUser.getCurrentUser().getString("name")));
 
+
+        Typeface droidSans = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
 
         nameView.setTypeface(droidSans);
         newButton.setTypeface(droidSans);
@@ -58,5 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 ((Button) findViewById(R.id.newButton)).setText("Resume Experiment");
             }
         }
+    }
+
+    public void logOut(View view) {
+        ParseUser.logOutInBackground();
+        startActivity(new Intent(this, LogInActivity.class));
+        finish();
     }
 }

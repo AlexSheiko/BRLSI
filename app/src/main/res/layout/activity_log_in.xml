@@ -17,7 +17,7 @@
         android:textSize="38sp"
         android:textColor="@color/text_dark"
         android:layout_marginBottom="16dp"
-        android:inputType="textPersonName|textCapWords"
+        android:inputType="textPersonName"
         style="@style/TextAppearance.AppCompat.Display1"/>
 
     <EditText

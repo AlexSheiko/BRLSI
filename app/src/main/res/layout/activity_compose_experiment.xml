@@ -34,6 +34,7 @@
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Your Name" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -46,6 +47,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Title of Experiment"
                         android:id="@+id/title" />
 
@@ -67,6 +69,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Date"
                         android:id="@+id/date" />
 
@@ -80,6 +83,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Time"
                         android:id="@+id/time" />
 
@@ -93,6 +97,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Location"
                         android:id="@+id/location" />
 
@@ -109,6 +114,7 @@
 
             <EditText
                 android:layout_width="match_parent"
+                android:textSize="@dimen/form_edittext_size"
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:hint="Conditions"
@@ -123,6 +129,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
                 android:hint="What equipment was used?"
                 android:lines="3" />
@@ -135,6 +142,7 @@
 
             <EditText
                 android:layout_width="match_parent"
+                android:textSize="@dimen/form_edittext_size"
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:hint="What action was undertaken?"
@@ -149,6 +157,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
                 android:hint="What happened?"
                 android:lines="3" />
@@ -162,6 +171,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
                 android:hint="What did it happen?"
                 android:lines="3" />
@@ -175,6 +185,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
                 android:hint="How can you use this information?"
                 android:lines="3" />
@@ -183,7 +194,13 @@
 
         <Button
             android:id="@+id/finishButton"
+            style="@style/ButtonLarge"
             android:onClick="finishExperiment"
+            android:textColor="#FFF"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="168dp"
+            android:textSize="38sp"
+            android:background="@color/action_blue"
             android:text="Finished"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

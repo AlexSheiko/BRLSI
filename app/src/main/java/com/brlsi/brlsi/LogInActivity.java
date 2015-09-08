@@ -40,7 +40,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     public void logIn(View view) {
-        String username = usernameField.getText().toString().trim();
+        String username = usernameField.getText().toString().trim().toLowerCase();
         String password = passwordField.getText().toString().trim();
 
         ParseUser.logInInBackground(username, password, new LogInCallback() {

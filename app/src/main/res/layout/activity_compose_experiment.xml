@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".StartExperimentActivity">
+
+    <requestFocus />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,10 +36,11 @@
 
                     <EditText
                         android:id="@+id/name"
+                        android:paddingLeft="24dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/form_edittext_size"
-                        android:hint="Your Name" />
+                        android:hint="Your name"
+                        android:textSize="@dimen/form_edittext_size" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -45,11 +50,12 @@
                     android:layout_marginTop="16dp">
 
                     <EditText
+                        android:id="@+id/title"
+                        android:paddingLeft="24dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/form_edittext_size"
-                        android:hint="Title of Experiment"
-                        android:id="@+id/title" />
+                        android:hint="Title of experiment"
+                        android:textSize="@dimen/form_edittext_size" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -67,11 +73,12 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/form_edittext_size"
+                        android:inputType="date"
                         android:hint="Date"
-                        android:id="@+id/date" />
+                        android:textSize="@dimen/form_edittext_size" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -81,11 +88,12 @@
                     android:layout_marginTop="16dp">
 
                     <EditText
+                        android:id="@+id/time"
                         android:layout_width="match_parent"
+                        android:inputType="datetime"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Time"
-                        android:id="@+id/time" />
+                        android:textSize="@dimen/form_edittext_size" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -95,11 +103,11 @@
                     android:layout_marginTop="16dp">
 
                     <EditText
+                        android:id="@+id/location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/form_edittext_size"
                         android:hint="Location"
-                        android:id="@+id/location" />
+                        android:textSize="@dimen/form_edittext_size" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -110,100 +118,128 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
 
             <EditText
+                android:id="@+id/conditions"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/form_edittext_size"
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:hint="Conditions"
-                android:lines="3" />
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp">
 
             <EditText
+                android:id="@+id/equipment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
                 android:hint="What equipment was used?"
-                android:lines="3" />
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp">
 
             <EditText
+                android:id="@+id/action"
                 android:layout_width="match_parent"
-                android:textSize="@dimen/form_edittext_size"
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:hint="What action was undertaken?"
-                android:lines="3" />
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <EditText
+                android:id="@+id/outcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form_edittext_size"
+                android:gravity="top"
+                android:hint="What was the expected outcome?"
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <EditText
+                android:id="@+id/whatHappened"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="top"
                 android:hint="What happened?"
-                android:lines="3" />
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <EditText
+                android:id="@+id/whyDidHappen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
-                android:hint="What did it happen?"
-                android:lines="3" />
+                android:hint="Why did it happen?"
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
 
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <EditText
+                android:id="@+id/howToUse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/form_edittext_size"
                 android:gravity="top"
                 android:hint="How can you use this information?"
-                android:lines="3" />
+                android:lines="3"
+                android:textSize="@dimen/form_edittext_size" />
 
         </android.support.design.widget.TextInputLayout>
 
         <Button
             android:id="@+id/finishButton"
             style="@style/ButtonLarge"
-            android:onClick="finishExperiment"
-            android:textColor="#FFF"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="168dp"
-            android:textSize="38sp"
-            android:background="@color/action_blue"
-            android:text="Finished"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="168dp"
+            android:layout_marginTop="26dp"
+            android:background="@color/action_blue"
+            android:onClick="finishExperiment"
+            android:text="Finished"
+            android:textColor="#FFF"
+            android:textSize="42sp" />
 
     </LinearLayout>
 

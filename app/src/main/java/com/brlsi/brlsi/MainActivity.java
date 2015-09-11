@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
                 ParseUser.getCurrentUser().getString("name")));
 
 
-        Typeface droidSans = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
+        Typeface signika = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
 
-        nameView.setTypeface(droidSans);
-        newButton.setTypeface(droidSans);
-        pastButton.setTypeface(droidSans);
-        logoutButton.setTypeface(droidSans);
+        nameView.setTypeface(signika);
+        newButton.setTypeface(signika);
+        pastButton.setTypeface(signika);
+        logoutButton.setTypeface(signika);
     }
 
     public void startExperiment(View view) {
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_EXPERIMENT) {
             if (resultCode == RESULT_OK) {
                 ((Button) findViewById(R.id.pastButton)).setText("Past Experiments +1");
+                ((Button) findViewById(R.id.newButton)).setText("New Experiment");
             } else {
                 ((Button) findViewById(R.id.newButton)).setText("Resume Experiment");
             }

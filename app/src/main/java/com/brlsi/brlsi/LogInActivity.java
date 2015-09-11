@@ -31,12 +31,12 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         ButterKnife.bind(this);
 
-        Typeface droidSans = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
+        Typeface signika = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
 
 
-        usernameField.setTypeface(droidSans);
-        passwordField.setTypeface(droidSans);
-        loginButton.setTypeface(droidSans);
+        usernameField.setTypeface(signika);
+        passwordField.setTypeface(signika);
+        loginButton.setTypeface(signika);
     }
 
     public void logIn(View view) {

@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">BRLSI</string>
-
-    <string name="title_activity_start_experiment">StartExperimentActivity</string>
-    <string name="title_activity_experiment_list">ExperimentListActivity</string>
 </resources>

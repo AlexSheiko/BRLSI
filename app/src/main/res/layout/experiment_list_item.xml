@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Button xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<Button
     android:id="@android:id/text1"
     style="@style/ButtonLarge"
-    tools:text="Bunsen Burner"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="112dp"
+    android:layout_centerVertical="true"
+    android:background="?selectableItemBackground"
+    android:textColor="#545454"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:clickable="false"
+    tools:text="Bunsen Burner"/>

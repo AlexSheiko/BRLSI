@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -69,9 +70,17 @@ public class ExperimentListActivity extends AppCompatActivity {
             public void done(List<ParseObject> experiments, ParseException e) {
                 if (e == null) {
                     mExperiments = experiments;
-                    for (ParseObject exp : experiments) {
-                        adapter.add(exp.getString("title"));
-                    }
+                    ParseObject.unpinAllInBackground(mExperiments, new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                for (final ParseObject exp : mExperiments) {
+                                    adapter.add(exp.getString("title"));
+                                    exp.pinInBackground();
+                                }
+                            }
+                        }
+                    });
                 } else {
                     Toast.makeText(ExperimentListActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

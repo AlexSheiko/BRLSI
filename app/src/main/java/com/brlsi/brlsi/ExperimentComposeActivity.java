@@ -1,5 +1,6 @@
 package com.brlsi.brlsi;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -14,10 +16,14 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ExperimentComposeActivity extends AppCompatActivity {
+public class ExperimentComposeActivity extends AppCompatActivity
+        implements TimePickerDialog.OnTimeSetListener {
 
     @Bind(R.id.name)
     EditText nameField;
@@ -64,6 +70,7 @@ public class ExperimentComposeActivity extends AppCompatActivity {
         if (getIntent().hasExtra("experiment_id")) {
             String experimentId = getIntent().getStringExtra("experiment_id");
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Experiment");
+            query.fromLocalDatastore();
             query.getInBackground(experimentId, new GetCallback<ParseObject>() {
                 @Override
                 public void done(ParseObject experiment, ParseException e) {
@@ -72,6 +79,35 @@ public class ExperimentComposeActivity extends AppCompatActivity {
                 }
             });
         }
+
+        timeField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View inputField, boolean focused) {
+                if (focused) {
+                    if (((EditText)inputField).getText().toString().isEmpty()) {
+                        new TimePickerDialog(
+                                ExperimentComposeActivity.this,
+                                ExperimentComposeActivity.this,
+                                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                                Calendar.getInstance().get(Calendar.MINUTE),
+                                true
+                        ).show();
+                    } else {
+                        String timeString = ((EditText) inputField).getText().toString();
+                        int hour = Integer.parseInt(timeString.split(":")[0]);
+                        int minute = Integer.parseInt(timeString.split(":")[1]);
+
+                        new TimePickerDialog(
+                                ExperimentComposeActivity.this,
+                                ExperimentComposeActivity.this,
+                                hour,
+                                minute,
+                                true
+                        ).show();
+                    }
+                }
+            }
+        });
     }
 
     private void populateFields(ParseObject experiment) {
@@ -181,5 +217,16 @@ public class ExperimentComposeActivity extends AppCompatActivity {
     public void onBackPressed() {
         finishExperiment(new View(this));
         super.onBackPressed();
+    }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        calendar.set(Calendar.MINUTE, minute);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        String time = dateFormat.format(calendar.getTime());
+        timeField.setText(time);
+        timeField.setSelection(timeField.length());
     }
 }

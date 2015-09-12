@@ -1,13 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    tools:context=".StartExperimentActivity">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:context=".StartExperimentActivity">
 
-    <requestFocus />
+    <requestFocus/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,11 +36,11 @@
 
                     <EditText
                         android:id="@+id/name"
-                        android:paddingLeft="24dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Your name"
-                        android:textSize="@dimen/form_edittext_size" />
+                        android:paddingLeft="24dp"
+                        android:textSize="@dimen/form_edittext_size"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -51,11 +51,11 @@
 
                     <EditText
                         android:id="@+id/title"
-                        android:paddingLeft="24dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Title of experiment"
-                        android:textSize="@dimen/form_edittext_size" />
+                        android:paddingLeft="24dp"
+                        android:textSize="@dimen/form_edittext_size"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -77,25 +77,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:focusableInTouchMode="false"
-                        android:inputType="date"
                         android:hint="Date"
-                        android:textSize="@dimen/form_edittext_size" />
+                        android:inputType="date"
+                        android:textSize="@dimen/form_edittext_size"/>
 
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
+                    android:layout_height="wrap_content">
+                    android:layout_marginTop="16dp"
 
                     <EditText
                         android:id="@+id/time"
                         android:layout_width="match_parent"
-                        android:inputType="datetime"
-                        android:focusableInTouchMode="false"
                         android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
                         android:hint="Time"
-                        android:textSize="@dimen/form_edittext_size" />
+                        android:inputType="datetime"
+                        android:textSize="@dimen/form_edittext_size"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -109,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Location"
-                        android:textSize="@dimen/form_edittext_size" />
+                        android:textSize="@dimen/form_edittext_size"/>
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -118,21 +118,39 @@
         </LinearLayout>
 
 
-        <android.support.design.widget.TextInputLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
-            <EditText
-                android:id="@+id/conditions"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top"
-                android:hint="Conditions"
-                android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:layout_height="match_parent">
 
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/conditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="108dp"
+                    android:gravity="top"
+                    android:hint="Conditions"
+                    android:lines="3"
+                    android:textSize="@dimen/form_edittext_size"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/camera_conditions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:alpha="0.4"
+                android:layout_marginRight="8dp"
+                android:onClick="attachPhoto"
+                android:background="@null"
+                android:src="@drawable/ic_photo_camera"/>
+
+        </FrameLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -146,7 +164,7 @@
                 android:gravity="top"
                 android:hint="What equipment was used?"
                 android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:textSize="@dimen/form_edittext_size"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -162,7 +180,7 @@
                 android:gravity="top"
                 android:hint="What action was undertaken?"
                 android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:textSize="@dimen/form_edittext_size"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -178,7 +196,7 @@
                 android:gravity="top"
                 android:hint="What was the expected outcome?"
                 android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:textSize="@dimen/form_edittext_size"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -194,7 +212,7 @@
                 android:gravity="top"
                 android:hint="What happened?"
                 android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:textSize="@dimen/form_edittext_size"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -210,7 +228,7 @@
                 android:gravity="top"
                 android:hint="Why did it happen?"
                 android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:textSize="@dimen/form_edittext_size"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -226,7 +244,7 @@
                 android:gravity="top"
                 android:hint="How can you use this information?"
                 android:lines="3"
-                android:textSize="@dimen/form_edittext_size" />
+                android:textSize="@dimen/form_edittext_size"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -241,7 +259,7 @@
             android:onClick="finishExperiment"
             android:text="Finished"
             android:textColor="#FFF"
-            android:textSize="42sp" />
+            android:textSize="42sp"/>
 
     </LinearLayout>
 

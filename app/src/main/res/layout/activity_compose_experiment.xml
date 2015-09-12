@@ -76,6 +76,7 @@
                         android:id="@+id/date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusableInTouchMode="false"
                         android:inputType="date"
                         android:hint="Date"
                         android:textSize="@dimen/form_edittext_size" />
@@ -91,6 +92,7 @@
                         android:id="@+id/time"
                         android:layout_width="match_parent"
                         android:inputType="datetime"
+                        android:focusableInTouchMode="false"
                         android:layout_height="wrap_content"
                         android:hint="Time"
                         android:textSize="@dimen/form_edittext_size" />

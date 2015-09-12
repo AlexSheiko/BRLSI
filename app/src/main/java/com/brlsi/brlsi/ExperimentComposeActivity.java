@@ -1,12 +1,15 @@
 package com.brlsi.brlsi;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
@@ -23,7 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ExperimentComposeActivity extends AppCompatActivity
-        implements TimePickerDialog.OnTimeSetListener {
+        implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     @Bind(R.id.name)
     EditText nameField;
@@ -80,10 +83,41 @@ public class ExperimentComposeActivity extends AppCompatActivity
             });
         }
 
-        timeField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dateField.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onFocusChange(View inputField, boolean focused) {
-                if (focused) {
+            public boolean onTouch(View inputField, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (((EditText) inputField).getText().toString().isEmpty()) {
+                        new DatePickerDialog(
+                                ExperimentComposeActivity.this,
+                                ExperimentComposeActivity.this,
+                                Calendar.getInstance().get(Calendar.YEAR),
+                                Calendar.getInstance().get(Calendar.MONTH),
+                                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+                        ).show();
+                    } else {
+                        String dateString = ((EditText) inputField).getText().toString();
+                        int day = Integer.parseInt(dateString.split("/")[0]);
+                        int month = Integer.parseInt(dateString.split("/")[1]) - 1;
+                        int year = 2000 + Integer.parseInt(dateString.split("/")[2]);
+
+                        new DatePickerDialog(
+                                ExperimentComposeActivity.this,
+                                ExperimentComposeActivity.this,
+                                year,
+                                month,
+                                day
+                        ).show();
+                    }
+                }
+                return true;
+            }
+        });
+
+        timeField.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View inputField, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (((EditText)inputField).getText().toString().isEmpty()) {
                         new TimePickerDialog(
                                 ExperimentComposeActivity.this,
@@ -106,6 +140,7 @@ public class ExperimentComposeActivity extends AppCompatActivity
                         ).show();
                     }
                 }
+                return true;
             }
         });
     }
@@ -224,9 +259,21 @@ public class ExperimentComposeActivity extends AppCompatActivity
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
-        String time = dateFormat.format(calendar.getTime());
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        String time = timeFormat.format(calendar.getTime());
         timeField.setText(time);
         timeField.setSelection(timeField.length());
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        String date = dateFormat.format(calendar.getTime());
+        dateField.setText(date);
+        dateField.setSelection(dateField.length());
     }
 }

@@ -20,13 +20,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -62,20 +67,34 @@ public class ExperimentComposeActivity extends AppCompatActivity
     @Bind(R.id.howToUse)
     EditText howToUseField;
 
+    @Bind(R.id.camera_conditions)
+    ImageButton cameraConditionsButton;
+    @Bind(R.id.camera_equipment)
+    ImageButton cameraEquipmentButton;
+    @Bind(R.id.camera_action)
+    ImageButton cameraActionButton;
+    @Bind(R.id.camera_outcome)
+    ImageButton cameraOutcomeButton;
+    @Bind(R.id.camera_what_happened)
+    ImageButton cameraWhatHappenedButton;
+    @Bind(R.id.camera_why_did_happen)
+    ImageButton cameraWhyDidHappenButton;
+    @Bind(R.id.camera_how_to_use)
+    ImageButton cameraHowToUseButton;
+
     @Bind(R.id.finishButton)
     Button finishButton;
     private ParseObject mExperiment;
 
     private static final int REQUEST_IMAGE_CAPTURE = 101;
     String mCurrentPhotoPath;
+    private int mPhotoPickerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose_experiment);
         ButterKnife.bind(this);
-
-        // TODO: Insert photo icon
 
 
         Typeface signika = Typeface.createFromAsset(getAssets(), "Signika-Bold.otf");
@@ -85,7 +104,6 @@ public class ExperimentComposeActivity extends AppCompatActivity
         if (getIntent().hasExtra("experiment_id")) {
             String experimentId = getIntent().getStringExtra("experiment_id");
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Experiment");
-            query.fromLocalDatastore();
             query.getInBackground(experimentId, new GetCallback<ParseObject>() {
                 @Override
                 public void done(ParseObject experiment, ParseException e) {
@@ -93,6 +111,8 @@ public class ExperimentComposeActivity extends AppCompatActivity
                     populateFields(experiment);
                 }
             });
+        } else {
+            mExperiment = new ParseObject("Experiment");
         }
 
         dateField.setOnTouchListener(new View.OnTouchListener() {
@@ -207,6 +227,50 @@ public class ExperimentComposeActivity extends AppCompatActivity
         if (howToUse != null) {
             howToUseField.setText(howToUse);
         }
+
+        ParseFile conditionsPhoto = experiment.getParseFile("conditionsPhoto");
+        ParseFile equipmentPhoto = experiment.getParseFile("equipmentPhoto");
+        ParseFile actionPhoto = experiment.getParseFile("actionPhoto");
+        ParseFile outcomePhoto = experiment.getParseFile("outcomePhoto");
+        ParseFile whatHappenedPhoto = experiment.getParseFile("whatHappenedPhoto");
+        ParseFile whyDidHappenPhoto = experiment.getParseFile("whyDidHappenPhoto");
+        ParseFile howToUsePhoto = experiment.getParseFile("howToUsePhoto");
+
+        if (conditionsPhoto != null) {
+            setImage(conditionsPhoto, cameraConditionsButton);
+        }
+        if (equipmentPhoto != null) {
+            setImage(equipmentPhoto, cameraEquipmentButton);
+        }
+        if (actionPhoto != null) {
+            setImage(actionPhoto, cameraActionButton);
+        }
+        if (outcomePhoto != null) {
+            setImage(outcomePhoto, cameraOutcomeButton);
+        }
+        if (whatHappenedPhoto != null) {
+            setImage(whatHappenedPhoto, cameraWhatHappenedButton);
+        }
+        if (whyDidHappenPhoto != null) {
+            setImage(whyDidHappenPhoto, cameraWhyDidHappenButton);
+        }
+        if (howToUsePhoto != null) {
+            setImage(howToUsePhoto, cameraHowToUseButton);
+        }
+    }
+
+    private void setImage(ParseFile photo, final ImageButton imageButton) {
+        photo.getDataInBackground(new GetDataCallback() {
+            @Override
+            public void done(byte[] imageData, ParseException e) {
+                if (e == null) {
+                    imageButton.setAlpha(1f);
+
+                    Glide.with(ExperimentComposeActivity.this)
+                            .load(imageData).fitCenter().centerCrop().into(imageButton);
+                }
+            }
+        });
     }
 
     public void finishExperiment(View view) {
@@ -238,26 +302,21 @@ public class ExperimentComposeActivity extends AppCompatActivity
             }
         }
 
-        ParseObject experiment;
-        if (mExperiment == null) {
-            experiment = new ParseObject("Experiment");
-        } else {
-            experiment = mExperiment;
-        }
-        experiment.put("author", ParseUser.getCurrentUser());
-        experiment.put("name", name);
-        experiment.put("title", title);
-        experiment.put("date", date);
-        experiment.put("time", time);
-        experiment.put("location", location);
-        experiment.put("conditions", conditions);
-        experiment.put("equipment", equipment);
-        experiment.put("action", action);
-        experiment.put("outcome", outcome);
-        experiment.put("whatHappened", whatHappened);
-        experiment.put("whyDidHappen", whyDidHappen);
-        experiment.put("howToUse", howToUse);
-        experiment.saveEventually();
+        mExperiment.put("author", ParseUser.getCurrentUser());
+        mExperiment.put("name", name);
+        mExperiment.put("title", title);
+        mExperiment.put("date", date);
+        mExperiment.put("time", time);
+        mExperiment.put("location", location);
+        mExperiment.put("conditions", conditions);
+        mExperiment.put("equipment", equipment);
+        mExperiment.put("action", action);
+        mExperiment.put("outcome", outcome);
+        mExperiment.put("whatHappened", whatHappened);
+        mExperiment.put("whyDidHappen", whyDidHappen);
+        mExperiment.put("howToUse", howToUse);
+
+        mExperiment.saveEventually();
     }
 
     @Override
@@ -290,6 +349,7 @@ public class ExperimentComposeActivity extends AppCompatActivity
     }
 
     public void attachPhoto(View view) {
+        mPhotoPickerId = view.getId();
         dispatchTakePictureIntent();
     }
 
@@ -335,9 +395,64 @@ public class ExperimentComposeActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            ImageButton cameraButton = (ImageButton) findViewById(R.id.camera_conditions);
+            ImageButton cameraButton = (ImageButton) findViewById(mPhotoPickerId);
             cameraButton.setAlpha(1f);
             Glide.with(this).load(mCurrentPhotoPath).fitCenter().centerCrop().into(cameraButton);
+
+            try {
+                InputStream iStream = getContentResolver().openInputStream(Uri.parse(mCurrentPhotoPath));
+                byte[] inputData = getBytes(iStream);
+                final ParseFile photo = new ParseFile("image.jpg", inputData);
+                photo.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            savePhoto(photo, mPhotoPickerId);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    private void savePhoto(ParseFile photo, int pickerId) {
+        switch (pickerId) {
+            case R.id.camera_conditions:
+                mExperiment.put("conditionsPhoto", photo);
+                break;
+            case R.id.camera_equipment:
+                mExperiment.put("equipmentPhoto", photo);
+                break;
+            case R.id.camera_action:
+                mExperiment.put("actionPhoto", photo);
+                break;
+            case R.id.camera_outcome:
+                mExperiment.put("outcomePhoto", photo);
+                break;
+            case R.id.camera_what_happened:
+                mExperiment.put("whatHappenedPhoto", photo);
+                break;
+            case R.id.camera_why_did_happen:
+                mExperiment.put("whyDidHappenPhoto", photo);
+                break;
+            case R.id.camera_how_to_use:
+                mExperiment.put("howToUsePhoto", photo);
+                break;
+        }
+        mExperiment.saveEventually();
     }
 }

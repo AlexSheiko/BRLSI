@@ -42,8 +42,6 @@ import butterknife.ButterKnife;
 public class ExperimentComposeActivity extends AppCompatActivity
         implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    @Bind(R.id.name)
-    EditText nameField;
     @Bind(R.id.title)
     EditText titleField;
     @Bind(R.id.date)
@@ -191,9 +189,6 @@ public class ExperimentComposeActivity extends AppCompatActivity
         String whyDidHappen = experiment.getString("whyDidHappen");
         String howToUse = experiment.getString("howToUse");
 
-        if (name != null) {
-            nameField.setText(name);
-        }
         if (title != null && !title.equals("No title")) {
             titleField.setText(title);
         }
@@ -282,7 +277,6 @@ public class ExperimentComposeActivity extends AppCompatActivity
     }
 
     private void saveExperiment() {
-        String name = nameField.getText().toString();
         String title = titleField.getText().toString();
         String date = dateField.getText().toString();
         String time = timeField.getText().toString();
@@ -303,7 +297,7 @@ public class ExperimentComposeActivity extends AppCompatActivity
         }
 
         mExperiment.put("author", ParseUser.getCurrentUser());
-        mExperiment.put("name", name);
+        mExperiment.put("name", ParseUser.getCurrentUser());
         mExperiment.put("title", title);
         mExperiment.put("date", date);
         mExperiment.put("time", time);
@@ -319,9 +313,16 @@ public class ExperimentComposeActivity extends AppCompatActivity
         mExperiment.saveEventually();
     }
 
+    public void cancel(View view) {
+        onBackPressed();
+    }
+
     @Override
     public void onBackPressed() {
-        finishExperiment(new View(this));
+        String title = titleField.getText().toString();
+        if (!title.isEmpty()) {
+            finishExperiment(new View(this));
+        }
         super.onBackPressed();
     }
 

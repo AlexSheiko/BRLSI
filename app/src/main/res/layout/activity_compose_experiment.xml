@@ -50,6 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Title of experiment"
+                        android:inputType="text|textCapSentences"
                         android:paddingLeft="24dp"
                         android:textSize="@dimen/form_edittext_size"/>
 
@@ -64,6 +65,7 @@
                         android:id="@+id/location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text|textCapSentences"
                         android:hint="Location"
                         android:textSize="@dimen/form_edittext_size"/>
 
@@ -128,6 +130,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:hint="Conditions"
                     android:lines="3"
                     android:paddingRight="108dp"
@@ -162,6 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:hint="What equipment was used?"
                     android:lines="3"
                     android:paddingRight="108dp"
@@ -196,6 +200,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:hint="What action was undertaken?"
                     android:lines="3"
                     android:paddingRight="108dp"
@@ -230,6 +235,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:hint="What was the expected outcome?"
                     android:lines="3"
                     android:paddingRight="108dp"
@@ -264,6 +270,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:hint="What happened?"
                     android:lines="3"
                     android:paddingRight="108dp"
@@ -299,6 +306,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:hint="Why did it happen?"
                     android:lines="3"
                     android:paddingRight="108dp"
@@ -335,6 +343,7 @@
                     android:gravity="top"
                     android:hint="How can you use this information?"
                     android:lines="3"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:paddingRight="108dp"
                     android:textSize="@dimen/form_edittext_size"/>
 

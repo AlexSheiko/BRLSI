@@ -297,7 +297,7 @@ public class ExperimentComposeActivity extends AppCompatActivity
         }
 
         mExperiment.put("author", ParseUser.getCurrentUser());
-        mExperiment.put("name", ParseUser.getCurrentUser());
+        mExperiment.put("name", ParseUser.getCurrentUser().getUsername());
         mExperiment.put("title", title);
         mExperiment.put("date", date);
         mExperiment.put("time", time);

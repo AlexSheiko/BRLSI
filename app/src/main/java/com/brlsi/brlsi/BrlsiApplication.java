@@ -13,6 +13,6 @@ public class BrlsiApplication extends Application {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "7p9hrd9VKFWIjdQH9jwEEK4jO1CBlRaJxWryHIup", "VHShjJUzYIXiFiRvjvwFuOVAvj5l3yOUwtOaDbKf");
+        Parse.initialize(this, "WKUcjYvVqvAJVon2XhmbfnzaQljT4H5Bp0m4mFJT", "I4JXF2mJRqIE1HpLbjUGeFkXYn4yYBgWSIz0ugqA");
     }
 }
